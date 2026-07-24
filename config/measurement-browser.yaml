@@ -1,0 +1,55 @@
+# Main site supplied by the operator. Authentication and the measurement-page route
+# still require confirmation before submission can be enabled.
+website_url: https://cpna_sfol.berryplastics.com
+integration: browser
+authentication: pending
+form_url: /
+header_row: 20
+row_key_column: Cav #
+submit_selector: '[data-testid="save-measurements"]'
+success_selector: '[data-testid="save-success"]'
+
+# `{row}` is replaced with Cav # (1 through 8). T/E @ 10 in the source report map
+# to the website's T/E "at PL" boxes; the other headings map directly.
+fields:
+  - column: Cav #
+    target: __cavity_row__
+    required: true
+    type: integer
+    choices: [1, 2, 3, 4, 5, 6, 7, 8]
+  - column: T @ 90
+    target: '[data-testid="measurement-{row}-t-at-90"]'
+    required: true
+    type: number
+  - column: T @ 10
+    target: '[data-testid="measurement-{row}-t-at-pl"]'
+    required: true
+    type: number
+  - column: T avg
+    target: '[data-testid="measurement-{row}-t-avg"]'
+    required: true
+    type: number
+  - column: T ovality
+    target: '[data-testid="measurement-{row}-t-ovality"]'
+    required: true
+    type: number
+  - column: E @ 90
+    target: '[data-testid="measurement-{row}-e-at-90"]'
+    required: true
+    type: number
+  - column: E @ 10
+    target: '[data-testid="measurement-{row}-e-at-pl"]'
+    required: true
+    type: number
+  - column: E avg
+    target: '[data-testid="measurement-{row}-e-avg"]'
+    required: true
+    type: number
+  - column: E ovality
+    target: '[data-testid="measurement-{row}-e-ovality"]'
+    required: true
+    type: number
+  - column: Weight
+    target: '[data-testid="measurement-{row}-weight"]'
+    required: true
+    type: number
