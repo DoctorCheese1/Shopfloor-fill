@@ -96,6 +96,29 @@ changing it.
 
 ## Installation and usage
 
+### Windows automatic installation
+
+Install Python 3.11 or newer, then double-click `install.bat` or run it from Command
+Prompt:
+
+```bat
+install.bat
+```
+
+The installer creates `.venv`, updates the Python packaging tools, installs this
+project and its test dependencies, downloads Playwright Chromium, and generates the
+anonymized example workbooks. It stops immediately and returns a nonzero exit code
+if any step fails. It does not request, save, or embed website credentials. After
+installation, run a safe preview with:
+
+```bat
+.venv\Scripts\shopfloor-import.exe examples\anonymized_measurement_report.xlsx --config config\measurement-browser.yaml
+```
+
+Website writes remain blocked while `authentication: pending` is configured.
+
+### Manual installation
+
 ```bash
 python -m venv .venv
 . .venv/bin/activate
