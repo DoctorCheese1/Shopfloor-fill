@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shopfloor-importer"
+version = "0.1.0"
+description = "Validated Excel importer for a configurable shop-floor system"
+requires-python = ">=3.11"
+dependencies = ["openpyxl>=3.1,<4", "PyYAML>=6,<7", "playwright>=1.45,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+shopfloor-import = "shopfloor_importer.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["shopfloor_importer*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

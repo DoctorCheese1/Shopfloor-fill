@@ -1,0 +1,53 @@
+# Replace these example values only after confirming them with the site owner.
+website_url: https://shopfloor.example.invalid
+integration: browser
+authentication: form
+form_url: /work-orders/new
+submit_selector: '[data-testid="save-work-order"]'
+success_selector: '[data-testid="save-success"]'
+
+# Every target is a placeholder stable CSS selector that must be verified in the DOM.
+fields:
+  - column: Record Ref
+    target: '[name="externalReference"]'
+    required: true
+    type: string
+  - column: Item Ref
+    target: '[name="itemCode"]'
+    required: true
+    type: string
+  - column: Planned Units
+    target: '[name="plannedQuantity"]'
+    required: true
+    type: integer
+  - column: Due On
+    target: '[name="dueDate"]'
+    required: true
+    type: date
+  - column: Work Area
+    target: '[name="workCenterCode"]'
+    required: true
+    type: string
+  - column: Urgency
+    target: '[name="priorityCode"]'
+    type: string
+    choices: [LOW, NORMAL, HIGH]
+  - column: Operator Note
+    target: '[name="notes"]'
+    type: string
+  - column: T 90
+    target: '[name="t90"]'
+    required: true
+    type: number
+  - column: T PL
+    target: '[name="tPl"]'
+    required: true
+    type: number
+  - column: E
+    target: '[name="e"]'
+    required: true
+    type: number
+  - column: Weight
+    target: '[name="weight"]'
+    required: true
+    type: number
