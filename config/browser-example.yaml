@@ -1,0 +1,34 @@
+# Replace the safe placeholder URL and verify every selector with the site owner.
+website_url: https://shopfloor.example.invalid
+integration: browser
+authentication: form
+form_url: /work-orders/new
+submit_selector: '[data-testid="save-work-order"]'
+success_selector: '[data-testid="save-success"]'
+
+# Each target is a stable machine identifier. The optional enable_selector is the
+# checkbox that unlocks the associated input before Playwright fills it.
+fields:
+  - column: Record Ref
+    target: '[name="externalReference"]'
+    required: true
+  - column: T 90
+    target: '[name="t90"]'
+    enable_selector: '[name="enableT90"]'
+    required: true
+    type: number
+  - column: T PL
+    target: '[name="tPl"]'
+    enable_selector: '[name="enableTPl"]'
+    required: true
+    type: number
+  - column: E
+    target: '[name="e"]'
+    enable_selector: '[name="enableE"]'
+    required: true
+    type: number
+  - column: Weight
+    target: '[name="weight"]'
+    enable_selector: '[name="enableWeight"]'
+    required: true
+    type: number
