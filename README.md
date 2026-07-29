@@ -117,6 +117,27 @@ installation, run a safe preview with:
 
 Website writes remain blocked while `authentication: pending` is configured.
 
+### Daily Windows use
+
+After installation, double-click `submit.bat`. It asks for:
+
+1. The full path to the Excel report.
+2. The mold/report number, such as `9167`.
+3. The machine: `A11` or `A16`.
+
+It always runs a validation preview first. After a successful preview, press Enter
+to stop without writing or type the exact word `SUBMIT` to authorize the website
+attempt. You can also supply all three values from Command Prompt:
+
+```bat
+submit.bat "C:\Reports\9167.xlsx" 9167 A11
+```
+
+The mold/report number and machine are included in the preview, duplicate
+fingerprint, and browser field mapping. Values other than `A11` or `A16` are
+rejected. At present, the final website attempt still stops safely because the
+website authentication flow and real selectors have not yet been supplied.
+
 ### Manual installation
 
 ```bash

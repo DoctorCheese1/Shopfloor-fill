@@ -20,6 +20,8 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("--confirm", help=f"required with --submit; must equal {CONFIRMATION!r}")
     result.add_argument("--ledger", default="state/submitted.json")
     result.add_argument("--results", help="result CSV path (default: timestamped under results/)")
+    result.add_argument("--record", help="mold/report number, for example 9167")
+    result.add_argument("--machine", help="shop-floor machine, for example A11 or A16")
     return result
 
 
@@ -28,7 +30,19 @@ def main(argv: list[str] | None = None) -> int:
     if args.submit and args.confirm != CONFIRMATION:
         parser().error(f"writing requires --submit --confirm {CONFIRMATION}")
     config = load_config(args.config)
+    if config.record_selector and not args.record:
+        parser().error("this configuration requires --record")
+    if config.machine_selector and not args.machine:
+        parser().error("this configuration requires --machine")
+    machine = args.machine.upper() if args.machine else None
+    if machine and config.allowed_machines and machine not in config.allowed_machines:
+        parser().error(f"--machine must be one of: {', '.join(config.allowed_machines)}")
     records = read_workbook(args.workbook, config.fields, config.header_row)
+    for record in records:
+        if config.record_selector:
+            record.mapped[config.record_selector] = args.record
+        if config.machine_selector:
+            record.mapped[config.machine_selector] = machine
     ledger = SubmissionLedger(args.ledger)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     result_path = Path(args.results or f"results/import-{timestamp}.csv")

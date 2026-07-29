@@ -60,7 +60,8 @@ def submit_browser(config: Config, values: dict[str, Any]) -> str:
             if selector == row_target:
                 continue
             target_selector = selector.replace("{row}", str(row_value))
-            enable_selector = specs_by_target[selector].enable_selector
+            spec = specs_by_target.get(selector)
+            enable_selector = spec.enable_selector if spec else None
             if enable_selector:
                 enable_selector = enable_selector.replace("{row}", str(row_value))
             fill_enabled_field(page, target_selector, value, enable_selector)

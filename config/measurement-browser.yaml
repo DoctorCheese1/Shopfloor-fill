@@ -5,14 +5,17 @@ integration: browser
 authentication: pending
 form_url: /
 header_row: 20
-row_key_column: Cav #
+row_key_column: "Cav #"
 submit_selector: '[data-testid="save-measurements"]'
 success_selector: '[data-testid="save-success"]'
+record_selector: '[data-testid="mold-number"]'
+machine_selector: '[data-testid="machine"]'
+allowed_machines: [A11, A16]
 
 # `{row}` is replaced with Cav # (1 through 8). T/E @ 10 in the source report map
 # to the website's T/E "at PL" boxes; the other headings map directly.
 fields:
-  - column: Cav #
+  - column: "Cav #"
     target: __cavity_row__
     required: true
     type: integer

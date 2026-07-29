@@ -97,6 +97,9 @@ def test_measurement_config_limits_cavity_rows_and_maps_all_grid_fields():
     assert config.integration == "browser"
     assert config.website_url == "https://cpna_sfol.berryplastics.com"
     assert config.auth == "pending"
+    assert config.record_selector == '[data-testid="mold-number"]'
+    assert config.machine_selector == '[data-testid="machine"]'
+    assert config.allowed_machines == ("A11", "A16")
     assert config.header_row == 20
     assert config.row_key_column == "Cav #"
     assert config.fields[0].choices == tuple(str(value) for value in range(1, 9))

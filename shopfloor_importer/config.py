@@ -17,6 +17,9 @@ class Config:
     success_selector: str | None
     header_row: int
     row_key_column: str | None
+    record_selector: str | None
+    machine_selector: str | None
+    allowed_machines: tuple[str, ...]
     fields: tuple[FieldSpec, ...]
 
 
@@ -39,4 +42,7 @@ def load_config(path: str | Path) -> Config:
         success_selector=raw.get("success_selector"), fields=fields,
         header_row=int(raw.get("header_row", 1)),
         row_key_column=raw.get("row_key_column"),
+        record_selector=raw.get("record_selector"),
+        machine_selector=raw.get("machine_selector"),
+        allowed_machines=tuple(str(value).upper() for value in raw.get("allowed_machines", ())),
     )
